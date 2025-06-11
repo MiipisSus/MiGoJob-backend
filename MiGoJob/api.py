@@ -2,8 +2,8 @@ from ninja import NinjaAPI
 from ninja.errors import ValidationError
 from django.http import HttpResponse
 
-from companies.api import router as companies_router
-from jobs.api import router as jobs_router
+from apps.companies.api import router as companies_router
+from apps.jobs.api import router as jobs_router
 
 api = NinjaAPI()
 

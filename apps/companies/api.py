@@ -6,7 +6,7 @@ from .models import Company
 from .schemas import CompanySchema
 
 
-router = Router()
+router = Router(tags=['companies'])
 
 @router.get('/companies', response=List[CompanySchema])
 def list_companies(request):
