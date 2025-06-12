@@ -8,11 +8,11 @@ from .schemas import CompanySchema
 
 router = Router(tags=['companies'])
 
-@router.get('/companies', response=List[CompanySchema])
+@router.get('', response=List[CompanySchema])
 def list_companies(request):
     return Company.objects.all()
 
-@router.get('/companies/{id}', response=CompanySchema)
+@router.get('/{id}', response=CompanySchema)
 def retrieve_company(request, id: int):
     try:
         return Company.objects.get(id=id)
