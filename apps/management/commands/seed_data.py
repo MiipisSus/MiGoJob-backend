@@ -4,18 +4,18 @@ from apps.companies.models import Company
 
 from faker import Faker
 
-fake = Faker()
+fake = Faker('zh_TW')
 
 class Command(BaseCommand):
     help = 'Seed database with fake data'
 
     def handle(self, *args, **options):
-        for _ in range(3):
+        for _ in range(10):
             company = Company.objects.create(
                 name=fake.company()
             )
-            for _ in range(5):
-                salary_min, salary_max = sorted([fake.random_int(min=1000, max=10000) / 100 for _ in range(2)])
+            for _ in range(10):
+                salary_min, salary_max = sorted([fake.random_int(min=30000, max=200000) for _ in range(2)])
                 Job.objects.create(
                     name=fake.job(),
                     description=fake.text(),
