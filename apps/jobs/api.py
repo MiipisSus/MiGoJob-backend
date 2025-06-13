@@ -10,7 +10,8 @@ router = Router(tags=['jobs'])
 
 @router.get('', response=List[JobResponseSchema])
 def list_jobs(request, keyword: str = None):
-    return Job.objects.filter(name__contains=keyword) if keyword else Job.objects.all()
+    jobs = Job.objects.filter(name__contains=keyword) if keyword else Job.objects.all()
+    return jobs.order_by('-created_at')
 
 @router.get('/{id}', response=JobResponseSchema)
 def retrieve_job(request, id: int):

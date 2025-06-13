@@ -10,7 +10,8 @@ router = Router(tags=['companies'])
 
 @router.get('', response=List[CompanySchema])
 def list_companies(request):
-    return Company.objects.all()
+    companies = Company.objects.all()
+    return companies
 
 @router.get('/{id}', response=CompanySchema)
 def retrieve_company(request, id: int):
