@@ -1,5 +1,5 @@
 from ninja import ModelSchema
-from typing import List
+from typing import List, Optional
 
 from .models import Company
 from apps.jobs.schemas import JobSchema
@@ -7,7 +7,7 @@ from apps.jobs.schemas import JobSchema
 
 class CompanySchema(ModelSchema):
     jobs: List[JobSchema]
-    high_salary_jobs: List[JobSchema]
+    high_salary_jobs: Optional[List[JobSchema]] = []
     average_salary: float
     
     @staticmethod
