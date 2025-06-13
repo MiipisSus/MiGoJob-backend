@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': config('DB_NAME'),
         'USER': config('DB_USERNAME'),
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST': 'localhost',
+        'HOST': config('DB_HOST') if config('DB_HOST') else 'localhost',
         'PORT': '5432',
     }
 }
