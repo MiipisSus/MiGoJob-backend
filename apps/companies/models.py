@@ -4,6 +4,7 @@ from django.db.models import F, ExpressionWrapper
 
 class Company(models.Model):
     name = models.CharField(max_length=100)
+    description = models.TextField(null=True)
     
     @property
     def average_salary(self):
