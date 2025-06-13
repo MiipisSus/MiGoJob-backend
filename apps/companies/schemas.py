@@ -6,7 +6,7 @@ from apps.jobs.schemas import JobSchema
 
 
 class CompanySchema(ModelSchema):
-    jobs: List[JobSchema]
+    jobs: List[JobSchema] = []
     high_salary_jobs_count: int = 0
     average_salary: float
     
