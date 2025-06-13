@@ -7,12 +7,12 @@ from apps.jobs.schemas import JobSchema
 
 class CompanySchema(ModelSchema):
     jobs: List[JobSchema]
-    high_salary_jobs: Optional[List[JobSchema]] = []
+    high_salary_jobs_count: int = 0
     average_salary: float
     
     @staticmethod
-    def resolve_highest_salary_jobs(obj):
-        return obj.jobs.filter(salary_min__gte=100000).order_by('-salary_min')
+    def resolve_high_salary_jobs_count(obj):
+        return obj.jobs.filter(salary_min__gte=100000).count()
     
     class Meta:
         model = Company
