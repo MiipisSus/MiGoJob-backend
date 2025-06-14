@@ -7,5 +7,5 @@ from apps.jobs.api import router as jobs_router
 
 api = NinjaAPI()
 
-api.add_router('/companies/', companies_router)
-api.add_router('/jobs/', jobs_router)
+api.add_router('companies', companies_router)
+api.add_router('jobs', jobs_router)
