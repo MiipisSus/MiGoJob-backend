@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': config('DB_NAME'),
         'USER': config('DB_USERNAME'),
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST') if config('DB_HOST') else 'localhost',
+        'HOST': config('DB_HOST', default='localhost'),
         'PORT': '5432',
     }
 }
@@ -136,3 +136,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
