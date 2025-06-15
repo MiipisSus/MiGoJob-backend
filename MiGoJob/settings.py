@@ -43,11 +43,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'corsheaders',
+    'ninja_extra',
+    'ninja_jwt',
     
     # My apps
     'apps',
     'apps.companies',
     'apps.jobs',
+    'apps.users'
 ]
 
 MIDDLEWARE = [
