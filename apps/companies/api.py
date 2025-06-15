@@ -1,21 +1,37 @@
+from django.shortcuts import get_object_or_404
 from ninja import Router
-from ninja.errors import HttpError
 from typing import List
 
 from .models import Company
-from .schemas import CompanySchema
+from .schemas import CompanyIn, CompanyOut
+from apps.common.shortcuts import update_object
+from apps.auth import IsAuthenticated, IsSuperuser
 
 
 router = Router(tags=['companies'])
 
-@router.get('', response=List[CompanySchema])
+@router.get('', response=List[CompanyOut])
 def list_companies(request):
-    companies = Company.objects.all()
+    companies = Company.objects.all().order_by('-created_at')
     return companies
 
-@router.get('/{id}', response=CompanySchema)
+@router.get('/{id}', response=CompanyOut)
 def retrieve_company(request, id: int):
-    try:
-        return Company.objects.get(id=id)
-    except Company.DoesNotExist:
-        raise HttpError(404, f'Company with id {id} not found')
+    return get_object_or_404(Company, id=id)
+
+@router.post('', response=CompanyOut, auth=IsSuperuser())
+def create_company(request, payload: CompanyIn):
+    company = Company.objects.create(**payload.dict())
+    return company
+
+@router.patch('/{id}', response=CompanyOut, auth=IsSuperuser())
+def update_company(request, id: int, payload: CompanyIn):
+    company = get_object_or_404(Company, id=id)
+    company = update_object(instance=company, payload=payload)
+    return company
+
+@router.delete('/{id}', auth=IsSuperuser())
+def delete_company(request, id: int):
+    company = get_object_or_404(Company, id=id)
+    company.delete()
+    return
