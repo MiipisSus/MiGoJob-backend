@@ -2,11 +2,16 @@ from ninja import ModelSchema
 from typing import List, Optional
 
 from .models import Company
-from apps.jobs.schemas import JobSchema
+from apps.jobs.schemas import JobOut
 
 
-class CompanySchema(ModelSchema):
-    jobs: List[JobSchema] = []
+class CompanyIn(ModelSchema):
+    class Meta: 
+        model = Company
+        exclude = ['id']
+    
+class CompanyOut(ModelSchema):
+    jobs: List[JobOut] = []
     high_salary_jobs_count: int = 0
     average_salary: float
     
