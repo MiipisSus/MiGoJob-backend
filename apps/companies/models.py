@@ -6,6 +6,9 @@ class Company(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(null=True)
     
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
     @property
     def average_salary(self):
         jobs = self.jobs.annotate(
