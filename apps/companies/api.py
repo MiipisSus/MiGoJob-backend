@@ -19,7 +19,7 @@ def list_companies(request):
 def retrieve_company(request, id: int):
     return get_object_or_404(Company, id=id)
 
-@router.post('', response=CompanyOut, auth=IsSuperuser())
+@router.post('', response={201: CompanyOut}, auth=IsSuperuser())
 def create_company(request, payload: CompanyIn):
     company = Company.objects.create(**payload.dict())
     return company
@@ -30,7 +30,7 @@ def update_company(request, id: int, payload: CompanyIn):
     company = update_object(instance=company, payload=payload)
     return company
 
-@router.delete('/{id}', auth=IsSuperuser())
+@router.delete('/{id}', response={204: None}, auth=IsSuperuser())
 def delete_company(request, id: int):
     company = get_object_or_404(Company, id=id)
     company.delete()

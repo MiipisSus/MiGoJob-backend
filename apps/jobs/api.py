@@ -19,7 +19,7 @@ def list_jobs(request, keyword: str = None):
 def retrieve_job(request, id: int):
     return get_object_or_404(Job, id=id)
     
-@router.post('', response=JobOut, auth=IsSuperuser())
+@router.post('', response={201: JobOut}, auth=IsSuperuser())
 def create_job(request, payload: JobIn):
     get_object_or_404(Company, id=payload.company_id)
     
@@ -35,7 +35,7 @@ def update_job(request, id: int, payload: JobIn):
     
     return job
 
-@router.delete('/{id}', auth=IsSuperuser())
+@router.delete('/{id}', response={204: None}, auth=IsSuperuser())
 def delete_job(request, id: int):
     job = get_object_or_404(Job, id=id)
     job.delete()
