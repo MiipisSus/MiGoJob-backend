@@ -8,7 +8,8 @@ from apps.jobs.schemas import JobOut
 class CompanyIn(ModelSchema):
     class Meta: 
         model = Company
-        exclude = ['id']
+        exclude = ['id', 'created_at', 'updated_at']
+
     
 class CompanyOut(ModelSchema):
     jobs: List[JobOut] = []
