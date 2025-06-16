@@ -24,7 +24,7 @@ def create_company(request, payload: CompanyIn):
     company = Company.objects.create(**payload.dict())
     return company
 
-@router.patch('/{id}', response=CompanyOut, auth=IsSuperuser())
+@router.put('/{id}', response=CompanyOut, auth=IsSuperuser())
 def update_company(request, id: int, payload: CompanyIn):
     company = get_object_or_404(Company, id=id)
     company = update_object(instance=company, payload=payload)

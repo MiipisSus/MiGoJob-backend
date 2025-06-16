@@ -26,7 +26,7 @@ def create_job(request, payload: JobIn):
     job = Job.objects.create(**payload.dict())
     return job
 
-@router.patch('/{id}', response=JobOut, auth=IsSuperuser())
+@router.put('/{id}', response=JobOut, auth=IsSuperuser())
 def update_job(request, id: int, payload: JobIn):
     get_object_or_404(Company, id=payload.company_id)
     
